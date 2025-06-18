@@ -1,0 +1,19 @@
+[terminal]
+shell = {program = "/usr/bin/bash", args = ["-l"]}
+
+[window]
+opacity = 0.9
+blur = true
+
+[selection]
+save_to_clipboard = true
+
+[mouse]
+bindings = [{ mouse = "Right", action = "Paste" }]
+
+[font]
+normal = { family = "Perfect DOS VGA 437", style = "Regular" }
+bold = { family = "Perfect DOS VGA 437", style = "Bold" }
+italic = { family = "Perfect DOS VGA 437", style = "Italic" }
+size = 12
+

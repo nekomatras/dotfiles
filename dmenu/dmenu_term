@@ -1,0 +1,14 @@
+#!/bin/sh
+programm_name=$(dmenu_path | dmenu "$@")
+env -i TERM=alacritty $programm_name
+
+exit_code=$?
+pid=$!
+
+if [ $exit_code -eq 0 ]; then
+    kill -9 $pid > /dev/null
+    alacritty -e $programm_name
+else
+    kill -9 $pid > /dev/null
+    /bin/sh -c $programm_name
+fi
