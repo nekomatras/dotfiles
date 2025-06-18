@@ -12,7 +12,8 @@ super + Return
 
 # program launcher
 super + p
-	dmenu_run
+	otter_launcher
+	#dmenu_run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -23,7 +24,7 @@ super + Escape
 #
 
 # quit/restart bspwm
-super + alt + {q,r}
+super + alt + shift + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
@@ -46,9 +47,13 @@ super + g
 # state/flags
 #
 
+
+#####
 # set the window state
 super + {t,shift + t,o,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+#####
+
 
 # set the node flags
 super + ctrl + {m,x,y,z}
