@@ -12,7 +12,7 @@ super + Return
 
 # program launcher
 super + p
-	otter_launcher
+	alacritty --title otter-launcher --class otter-launcher --command otter-launcher
 	#dmenu_run
 
 # make sxhkd reload its configuration files:
@@ -24,7 +24,7 @@ super + Escape
 #
 
 # quit/restart bspwm
-super + alt + shift + {q,r}
+super + alt + ctrl + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
