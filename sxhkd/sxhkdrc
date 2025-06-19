@@ -12,7 +12,8 @@ super + Return
 
 # program launcher
 super + p
-	alacritty --title otter-launcher --class otter-launcher --command otter-launcher
+	kitty --title otter-launcher --class otter-launcher --detach otter-launcher
+	#alacritty --title otter-launcher --class otter-launcher --command otter-launcher
 	#dmenu_run
 
 # make sxhkd reload its configuration files:
