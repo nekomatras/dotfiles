@@ -98,11 +98,7 @@ description = "application menu"
 prefix = "app"
 cmd = """
 desktop_file() {
-find /usr/share/applications -name "*.desktop" 2>/dev/null
-find /usr/local/share/applications -name "*.desktop" 2>/dev/null
-find "$HOME/.local/share/applications" -name "*.desktop" 2>/dev/null
-find /var/lib/flatpak/exports/share/applications -name "*.desktop" 2>/dev/null
-find "$HOME/.local/share/flatpak/exports/share/applications" -name "*.desktop" 2>/dev/null
+dmenu_path 2>/dev/null
 }
 selected="$(desktop_file | sed 's/.desktop$//g' | sort | fzf -m -d / --with-nth -1 --reverse --padding 1,3 --prompt 'Launch Apps: ')"
 [ -z "$selected" ] && exit
