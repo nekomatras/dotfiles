@@ -7,3 +7,6 @@ font-size = 20
 background-opacity = 0.85
 background = 000000
 
+window-decoration = false
+
+copy-on-select = true
