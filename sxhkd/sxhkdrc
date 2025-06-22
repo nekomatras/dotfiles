@@ -12,7 +12,7 @@ super + Return
 
 # program launcher
 super + p
-	killall otter-launcher | kitty --title otter-launcher --class otter-launcher --detach otter-launcher
+	killall otter-launcher; kitty --title otter-launcher --class otter-launcher --detach otter-launcher
 	#alacritty --title otter-launcher --class otter-launcher --command otter-launcher
 	#dmenu_run
 

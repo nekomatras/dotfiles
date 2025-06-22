@@ -89,9 +89,9 @@ url_encode = true # "url_encode" should be true if the module is set to call web
 [[modules]]
 description = "run app"
 prefix = "run"
-cmd = "/bin/sh -c {}"
+cmd = "/bin/bash -c \"{}\""
 with_argument = true
-url_encode = true
+url_encode = false
 
 [[modules]]
 description = "application menu"
