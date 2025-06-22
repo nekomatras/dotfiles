@@ -1,0 +1,9 @@
+confirm-close-surface = false
+gtk-titlebar = false
+
+font-family = "Perfect DOS VGA 437"
+font-size = 20
+
+background-opacity = 0.85
+background = 000000
+

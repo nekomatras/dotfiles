@@ -89,7 +89,8 @@ url_encode = true # "url_encode" should be true if the module is set to call web
 [[modules]]
 description = "run app"
 prefix = "run"
-cmd = "/bin/bash -c \"{}\""
+cmd = "setsid -f gtk-launch {}"
+#cmd = "/bin/sh -e {}"
 with_argument = true
 url_encode = false
 
