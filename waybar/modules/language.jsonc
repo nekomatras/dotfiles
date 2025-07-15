@@ -1,0 +1,7 @@
+"hyprland/language": {
+              "format": "{}",
+              "format-en": "EN",
+              "format-ru": "RU",
+              "keyboard-name": "royuan-akko-multi-modes-keyboard-b",
+              "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+      }

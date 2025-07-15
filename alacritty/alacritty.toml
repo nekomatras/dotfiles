@@ -3,7 +3,7 @@ shell = {program = "/usr/bin/bash", args = ["-l"]}
 
 [window]
 opacity = 0.9
-blur = true
+blur = false
 
 [selection]
 save_to_clipboard = true
@@ -15,5 +15,5 @@ bindings = [{ mouse = "Right", action = "Paste" }]
 normal = { family = "Perfect DOS VGA 437", style = "Regular" }
 bold = { family = "Perfect DOS VGA 437", style = "Bold" }
 italic = { family = "Perfect DOS VGA 437", style = "Italic" }
-size = 12
+size = 18
 
