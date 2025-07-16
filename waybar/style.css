@@ -18,9 +18,9 @@
 * {
     border: none;
     border-radius: 0px;
-    min-height: 0;
+    min-height: 0px;
     margin: 0px;
-    padding: 0;
+    padding: 0px;
     color: #a25557;
 }
 
@@ -29,43 +29,40 @@
 window#waybar {
     color: #262626;
     background-color: #262626;
-    font-family: "Visitor TT2 BRK", "Visitor_Rus";
-    font-size: 30px;
+    font-family: "Visitor_Rus";
+    font-size: 26px;
     border-radius: 0px;
 }
 
-/* Every modules */
-#battery,
-#clock,
-#backlight,
-#cpu,
-#custom-keyboard-layout,
-#memory,
-#mode,
-#custom-weather,
-#network,
-#pulseaudio,
-#temperature,
-#tray,
-#idle_inhibitor,
-#window,
-#custom-power,
+/* -----------------------------------------------------------------------------
+ * Every module
+ * -------------------------------------------------------------------------- */
+
 #workspaces,
-#custom-media,
-#custom-launcher,
-#custom-PBPbattery {}
+#mode,
+#window,
+#tray,
+#backlight,
+#wireplumber,
+#network,
+#memory,
+#cpu,
+#battery,
+#clock {
+    margin-left: 15px;
+    margin-right: 15px;
+    }
 
 /* -----------------------------------------------------------------------------
  * Modules styles
  * -------------------------------------------------------------------------- */
 
 #clock {
-    /* color: #ff4499; */
-    color: #73daca;
+    margin-right: 0px;
 }
 
-#custom-weather {
-    color: #ff4499;
+#workspaces {
+    margin-left: 0px;
 }
 
 #battery {
@@ -92,10 +89,6 @@ window#waybar {
     animation-duration: 2s;
 }
 
-#cpu {
-    color: #f7768e;
-}
-
 #cpu.warning {
     color: orange;
 }
@@ -108,7 +101,6 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    color: #f7768e;
 }
 
 #memory.warning {
@@ -123,29 +115,9 @@ window#waybar {
     padding-right:5px;
 }
 
-#mode {
-}
-
 #network.disconnected {
     color: orange;
 }
-
-#pulseaudio {
-}
-
-#pulseaudio.microphone {
-}
-
-#temperature.critical {
-}
-
-#window {
-}
-
-#custom-media {
-}
-
-#workspaces {}
 
 #workspaces button {
     color: #950015;
@@ -164,9 +136,3 @@ window#waybar {
     border-bottom: #950015;
 }
 
-#custom-power {
-}
-
-#custom-launcher {}
-
-#backlight.icon {}
