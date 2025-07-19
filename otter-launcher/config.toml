@@ -89,7 +89,6 @@ url_encode = true # "url_encode" should be true if the module is set to call web
 [[modules]]
 description = "run app"
 prefix = "run"
-#cmd = "setsid -f gtk-launch {}"
 cmd = "hyprctl dispatch exec {}"
 with_argument = true
 url_encode = false
@@ -103,6 +102,6 @@ dmenu_path 2>/dev/null
 }
 selected="$(desktop_file | sed 's/.desktop$//g' | sort | fzf -m -d / --with-nth -1 --reverse --padding 1,3 --prompt 'Launch Apps: ')"
 [ -z "$selected" ] && exit
-echo "$selected" | while read -r line ; do setsid -f gtk-launch "$(basename $line)"; done
+echo "$selected" | while read -r line ; do hyprctl dispatch exec "$(basename $line)"; done
 """
 
