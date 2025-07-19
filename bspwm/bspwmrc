@@ -9,7 +9,7 @@ killall polybar &>/dev/null
 polybar aboba &
 
 pkill -f ~/Pictures/feh_changer.sh
-~/Pictures/feh_changer.sh ~/Pictures/desktop/ 600 &
+~/.config/bash/feh_changer.sh ~/Pictures/desktop/ 600 &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
