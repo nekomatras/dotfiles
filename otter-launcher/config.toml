@@ -90,7 +90,7 @@ url_encode = true # "url_encode" should be true if the module is set to call web
 description = "run app"
 prefix = "run"
 #cmd = "setsid -f gtk-launch {}"
-cmd = "setsid -f {}"
+cmd = "hyprctl dispatch exec {}"
 with_argument = true
 url_encode = false
 
