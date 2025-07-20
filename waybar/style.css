@@ -21,7 +21,7 @@
     min-height: 0px;
     margin: 0px;
     padding: 0px;
-    color: #f53801;
+    color: #BABABA;
 }
 
 
@@ -120,19 +120,19 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #ffffff;
+    color: #8D8D8D;
     border-bottom: 3px solid transparent;
     margin-bottom: 0px;
 }
 
 #workspaces button.active {
-    color: #ffffff;
-    border-bottom: 3px solid #ffffff;
+    color: #8D8D8D;
+    border-bottom: 3px solid #8D8D8D;
     margin-bottom: 1px;
 }
 
 #workspaces button.urgent {
-    color: #ffffff;
-    border-bottom: #ffffff;
+    color: #8D8D8D;
+    border-bottom: #8D8D8D;
 }
 
