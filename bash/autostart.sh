@@ -5,6 +5,7 @@ echo 80 | sudo tee /sys/class/power_supply/BAT1/charge_control_end_threshold
 
 ln -s .config/bash/.bash_profile .bash_profile
 ln -s .config/bash/.bashrc .bashrc
+sudo ../.config/custom-fonts/init-fonts.sh
 
 ELECTRON_FLAGS="--enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
 MARK_W="thisfileshouldpassthroughwaylandsupportargumentsaboba"
