@@ -7,6 +7,14 @@ ln -s .config/bash/.bash_profile .bash_profile
 ln -s .config/bash/.bashrc .bashrc
 sudo ../.config/custom-fonts/init-fonts.sh
 
+ln -s .config/bash/sync_google_drive.sh ~/Desktop/Shared/sync.sh
+mount_google_drive
+
+mount_google_drive() {
+  rclone mount "gdrive:Shared/SharedContent" "$HOME/Desktop/Shared/Remote/" & disown
+  rclone mount "gdrive:Shared/SharedBackup" "$HOME/Desktop/Shared/RemoteBackup/" & disown
+}
+
 ELECTRON_FLAGS="--enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
 MARK_W="thisfileshouldpassthroughwaylandsupportargumentsaboba"
 POSTFIX_W=".bakw"
