@@ -27,8 +27,8 @@ changeWallpaper()
   for monitor in "${commandline_args[@]:2}"
   do
     pic=$(find "${commandline_args[0]}" -maxdepth 1 -mindepth 1 | shuf -n1)
-    preload=$(hyprctl hyprpaper preload $pic)
-    checkHyprpaperCommandResult preload
+    #preload=$(hyprctl hyprpaper preload $pic)
+    #checkHyprpaperCommandResult preload
     load=$(hyprctl hyprpaper wallpaper "$monitor, $pic")
     checkHyprpaperCommandResult load
     echo "$monitor:$pic"
