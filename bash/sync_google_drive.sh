@@ -26,17 +26,7 @@ echo "Local backup folder: $LOCAL_BACKUP_DIR"
 echo "Remote folder: $REMOTE_DIR"
 echo "Remote backup folder: $REMOTE_BACKUP_DIR"
 
-###
-check
-
-backup_files "$LOCAL_DIR" "$LOCAL_BACKUP_DIR"
-backup_files "$REMOTE_DIR" "$REMOTE_BACKUP_DIR"
-
-copy_remote_to_local
-copy_local_to_remote
-
-copy_local_backup_to_remote
-###
+### Define functions
 
 get_mounted_source() {
     local target="$1"
@@ -48,9 +38,7 @@ get_mounted_source() {
 
     local source=$(findmnt -n -o SOURCE "$target")
 
-    if [ "$source" != "" ]; then
-        return $source
-    else
+    if [ "$source" == "" ]; then
         echo "Target [$target] is not mounted"
         exit 1
     fi
@@ -59,8 +47,9 @@ get_mounted_source() {
 check() {
     # Check mount targets
     local content_source=$(get_mounted_source "$REMOTE_DIR")
+    echo $content_source
     if [ "$content_source" != "$REMOTE_CONTENT_SOURCE" ]; then
-        echo "Error: $REMOTE_DIR not mounted to $REMOTE_CONTENT_SOURCE!"
+        echo "Error: $REMOTE_DIR not mounted to $REMOTE_CONTENT_SOURCE"
         exit 1
     else
         echo "$REMOTE_DIR mounted to $REMOTE_CONTENT_SOURCE"
@@ -68,7 +57,7 @@ check() {
 
     local backup_source=$(get_mounted_source "$REMOTE_BACKUP_DIR")
     if [ "$backup_source" != "$REMOTE_BACKUP_SOURCE" ]; then
-        echo "Error: $REMOTE_BACKUP_DIR not mounted to $REMOTE_BACKUP_SOURCE!"
+        echo "Error: $REMOTE_BACKUP_DIR not mounted to $REMOTE_BACKUP_SOURCE"
         exit 1
     else
         echo "$REMOTE_BACKUP_DIR mounted to $REMOTE_BACKUP_SOURCE"
@@ -83,8 +72,8 @@ check() {
     fi
 
     # Check if backup folder exists
-    if [ ! -d "$LOCAL_DIR/$LOCAL_BACKUP_DIR" ]; then
-        echo "There is no backup folder: $LOCAL_DIR/$LOCAL_BACKUP_DIR\nCreateing..."
+    if [ ! -d "$LOCAL_BACKUP_DIR" ]; then
+        echo "There is no backup folder: $LOCAL_BACKUP_DIR\nCreateing..."
         mkdir -p "$LOCAL_DIR" || { echo "Unable to create $LOCAL_DIR"; exit 1; }
     fi
 }
@@ -95,10 +84,17 @@ backup_files() {
     local source_dir=$1
     local target_dir=$2
 
+    if [ -z "$(ls -A $source_dir)" ]; then
+        echo "Directory [$source_dir] is empty. Skip backup..."
+        return 0
+    fi
+
     # Select archive name
     local timestamp=$(date +"%d-%m-%Y_%H:%M:%S")
     local backup_target_name="$target_dir/Backup-$timestamp"
     local backup_target_archive="$backup_target_dir.7z"
+
+    local temporary_archive_name="/tmp/gdrive-sync-tmp-backup-$(date +%s%N).7z"
 
     if [ ! -f "$backup_target_archive" ]; then
         echo "Create backup: $backup_target_archive"
@@ -114,7 +110,11 @@ backup_files() {
     echo "------------"
 
     echo "Compress $backup_target_archive"
-    7z a -t7z -mx=9 "$backup_target_archive" "$source_dir" || { echo "Unable to archive: $source_dir -> $backup_target_archive"; exit 1; }
+    7z a -t7z -mx=9 "$temporary_archive_name" "$source_dir" || { echo "Unable to archive: $source_dir -> $backup_target_archive"; exit 1; }
+    echo "------------"
+
+    echo "Copy $temporary_archive_name -> $backup_target_archive"
+    cp "$temporary_archive_name" "$backup_target_archive" || { echo "Unable to copy tmp backup to remote: $source_dir -> $backup_target_archive"; exit 1; }
 
     echo "List: $backup_target_archive"
     7z l "$backup_target_archive" || { echo "Unable to list content in archive: $backup_target_archive"; exit 1; }
@@ -125,7 +125,7 @@ copy_local_backup_to_remote() {
     local local_remote_dir="$REMOTE_BACKUP_DIR/$LOCAL_BACKUP_REMOTE_DIR"
     mkdir -p "$local_remote_dir"
     echo "Copy backup to remote [$LOCAL_BACKUP_DIR -> $local_remote_dir ($(get_mounted_source "$REMOTE_BACKUP_DIR")/$LOCAL_BACKUP_REMOTE_DIR)]"
-    cp -rfu "$LOCAL_BACKUP_DIR/*" "$local_remote_dir/" || { echo "Unable to copy: $LOCAL_DIR/* -> $local_remote_dir/"; exit 1; }
+    cp -rfu $LOCAL_BACKUP_DIR/* $local_remote_dir/ || { echo "Unable to copy: $LOCAL_DIR/* -> $local_remote_dir/"; exit 1; }
 }
 
 sync_local_to_remote() {
@@ -163,7 +163,7 @@ copy_local_to_remote() {
     ls -lh "$REMOTE_DIR/"
     echo "------------"
 
-    cp -rfu "$LOCAL_DIR/*" "$REMOTE_DIR/" || { echo "Unable to copy: $LOCAL_DIR/* -> $REMOTE_DIR/"; exit 1; }
+    cp -rfu $LOCAL_DIR/* "$REMOTE_DIR/" || { echo "Unable to copy: $LOCAL_DIR/* -> $REMOTE_DIR/"; exit 1; }
 
     echo "List remote after: $REMOTE_DIR"
     ls -lh "$REMOTE_DIR/"
@@ -177,9 +177,24 @@ copy_remote_to_local() {
     ls -lh "$LOCAL_DIR/"
     echo "------------"
 
-    cp -rfu "$REMOTE_DIR/*" "$LOCAL_DIR/" || { echo "Unable to copy: $REMOTE_DIR/* -> $LOCAL_DIR/"; exit 1; }
+    cp -rfu $REMOTE_DIR/* "$LOCAL_DIR/" || { echo "Unable to copy: $REMOTE_DIR/* -> $LOCAL_DIR/"; exit 1; }
 
     echo "List local after: $LOCAL_DIR"
     ls -lh "$LOCAL_DIR/"
     echo "------------"
 }
+
+
+
+### Execute
+check
+
+backup_files "$LOCAL_DIR" "$LOCAL_BACKUP_DIR"
+backup_files "$REMOTE_DIR" "$REMOTE_BACKUP_DIR"
+
+#copy_remote_to_local
+#copy_local_to_remote
+sync_remote_to_local
+sync_local_to_remote
+
+copy_local_backup_to_remote

@@ -7,6 +7,6 @@ if [[ -z $DISPLAY ]] && [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
 fi
 
 export PATH=$PATH:/opt/clion-2024.1/bin
-export STEAM_COMPAT_DATA_PATH=~/.local/share/Steam/steamapps/compatdata
-export STEAM_COMPAT_CLIENT_INSTALL_PATH=~/.local/share/Steam/steamapps/compatdata
+export STEAMLIBRARY=/mnt/windows/SteamLibrary
+export PROTON=$HOME/.steam/steam/compatibilitytools.d/GE-Proton10-24/files
 export EDITOR=vim

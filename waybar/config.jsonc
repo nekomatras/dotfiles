@@ -5,6 +5,27 @@
     "margin": 5,
 
     "height": 35,
+    "flex-shrink": 1,
+    "font-size": "12px",    
+
+    "#waybar": {
+        "display": "flex",
+        "justify-content": "space-between",
+        "align-items": "center"
+    },
+
+    "#left": {
+        "margin-right": "20px"
+    },
+
+    "#center": {
+        "margin-left": "20px",
+        "margin-right": "20px"
+    },
+
+    "#right": {
+        "margin-left": "60px"
+    },
 
     "modules-left": [
         "hyprland/workspaces",
@@ -13,15 +34,17 @@
     ],
  
     "modules-center": [
+	"custom/spotify"
     ],
 
     "modules-right": [
 	"tray",
-	"backlight",
+	//"backlight",
+	"bluetooth",
 	"wireplumber#sink",
 	"wireplumber#source",
-	"network",
-	"network#vpn",
+	//"network",
+	//"network#vpn",
 	"memory",
         "cpu",
         "battery",
@@ -169,5 +192,29 @@
          "format": "{percent}%",
          "on-scroll-down": "brightnessctl -c backlight set 1%-",
          "on-scroll-up": "brightnessctl -c backlight set +1%"
-    }
+    },
+
+
+
+"bluetooth": {
+	"on-click": "blueman-manager",
+	"format": " {status}",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	"format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+},
+
+
+"custom/spotify": {
+		  "format": "  {}",
+		  "interval": 5,
+		  "on-click": "flatpak run com.spotify.Client",
+		  "exec": "~/.config/waybar/scripts/spotify.sh"
+		}
+
+
 }
