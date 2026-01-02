@@ -27,11 +27,24 @@
 
 /* The whole bar */
 window#waybar {
+    margin: 100px;
     color: #262626;
     background-color: #262626;
     font-family: "Visitor_Rus";
-    font-size: 26px;
+    font-size: 20px;
     border-radius: 0px;
+}
+
+window#left {
+    margin-right: 20px;
+}
+window#center {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+window#right {
+    margin-left: 20px;
 }
 
 /* -----------------------------------------------------------------------------

@@ -1,41 +1,14 @@
 // Global 
 {
-    "layer": "top",
-    "position": "top",
-    "margin": 5,
-
-    "height": 35,
-    "flex-shrink": 1,
-    "font-size": "12px",    
-
-    "#waybar": {
-        "display": "flex",
-        "justify-content": "space-between",
-        "align-items": "center"
-    },
-
-    "#left": {
-        "margin-right": "20px"
-    },
-
-    "#center": {
-        "margin-left": "20px",
-        "margin-right": "20px"
-    },
-
-    "#right": {
-        "margin-left": "60px"
-    },
-
     "modules-left": [
         "hyprland/workspaces",
 	"hyprland/mode",
-        "hyprland/window"
-    ],
- 
-    "modules-center": [
+        "hyprland/window",
 	"custom/spotify"
     ],
+ 
+    /*"modules-center": [
+    ],*/
 
     "modules-right": [
 	"tray",
