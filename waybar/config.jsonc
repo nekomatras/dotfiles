@@ -192,7 +192,7 @@
 
     "custom/gdrive": {
        "exec": "~/.config/waybar/scripts/service-monitor.sh --user rclone-remote.service",
-       "interval": 1,
+       "interval": 10,
        "on-click": "~/.config/waybar/scripts/gdrive.sh",
        "format": "GDrv:{}"
     }
