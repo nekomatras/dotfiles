@@ -29,7 +29,8 @@
 window#waybar {
     margin: 100px;
     color: #262626;
-    background-color: #262626;
+    /* background-color: #262626; */
+    background-color: #000000;
     font-family: "Visitor_Rus";
     font-size: 20px;
     border-radius: 0px;
