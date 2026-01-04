@@ -1,0 +1,23 @@
+window {
+    background-color: #262626;
+    color: #bebebe;
+    font: 14px monospace;
+}
+
+entry {
+    background-color: #262626;
+    color: #bebebe;
+}
+
+#entry:selected {
+    background-color: #950015;
+    color: #bebebe;
+}
+
+listview {
+    background-color: #262626;
+    color: #bebebe;
+    border: 1px solid #bebebe;
+}
+
+
