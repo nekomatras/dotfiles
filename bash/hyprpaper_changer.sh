@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+###
+#DEPRECATED
+###
+
+
 #1st=Wallpapper folder
 #2nd=Change period in seconds
 #3th+=Names of monitors
@@ -13,7 +19,7 @@ fi
 
 checkHyprpaperCommandResult()
 {
-  if [ "$1" -ne "ok" ]
+  if [ "$1" != "ok" ]
   then
     killall hyprpaper
     hyprpaper & disown
@@ -29,7 +35,7 @@ changeWallpaper()
     pic=$(find "${commandline_args[0]}" -maxdepth 1 -mindepth 1 | shuf -n1)
     preload=$(hyprctl hyprpaper preload $pic)
     checkHyprpaperCommandResult $preload
-    load=$(hyprctl hyprpaper wallpaper "$monitor, $pic")
+    load=$(hyprctl hyprpaper wallpaper "$monitor, $pic, cover")
     checkHyprpaperCommandResult $load
     echo "$monitor:$pic"
   done
