@@ -15,5 +15,5 @@ bindings = [{ mouse = "Right", action = "Paste" }]
 normal = { family = "Perfect DOS VGA 437", style = "Regular" }
 bold = { family = "Perfect DOS VGA 437", style = "Bold" }
 italic = { family = "Perfect DOS VGA 437", style = "Italic" }
-size = 18
+size = 16
 

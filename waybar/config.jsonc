@@ -2,27 +2,28 @@
 {
     "modules-left": [
         "hyprland/workspaces",
-	"hyprland/mode",
-        "hyprland/window",
-	"custom/spotify"
+        "custom/spotify"
+	    //"hyprland/mode"
     ],
  
-    /*"modules-center": [
-    ],*/
+    "modules-center": [
+        //"custom/spotify",
+        "hyprland/window"
+    ],
 
     "modules-right": [
-	"tray",
-	//"backlight",
-	"custom/gdrive",
-	"bluetooth",
-	"wireplumber#sink",
-	"wireplumber#source",
-	//"network",
-	//"network#vpn",
-	"memory",
+	    "tray",
+    	//"backlight",
+    	"custom/gdrive",
+    	"bluetooth",
+    	"wireplumber#sink",
+    	"wireplumber#source",
+    	//"network",
+    	//"network#vpn",
+	    "memory",
         "cpu",
-        "battery",
-	"clock"
+        //"battery",
+    	"clock"
     ],
 
     // Modules
@@ -30,8 +31,8 @@
     "idle_inhibitor": {
         "format": "{icon} ",
         "format-icons":{
-            "activated": " ",
-            "deactivated": " "
+            "activated": "<o>",
+            "deactivated": "<x>"
         }
     },
 
@@ -49,25 +50,22 @@
 
     "clock": {
         "interval": 30,
-        //"format-alt": " {:%e %b %Y}", // Icon: calendar-alt
         "format": "{:%e %b %Y %H:%M} ",
         "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
         "interval": 5,
-        "format": "   {usage}% ({load})", // Icon: microchip  
+        "format": "cpu: {usage}% ({load})",
         "states": {
             "warning": 70,
             "critical": 90
-        },
-        "on-click": "alacritty -e 'htop'"
+        }
     },
 
     "memory": {
         "interval": 30,
-        "format": "  {}%", // Icon: memory 
-        //"on-click": "free -h", 
+        "format": "ram: {}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -102,8 +100,7 @@
     },
 
     "hyprland/window": {
-        "format": "{}",
-        "max-length": 150
+        "format": "{}"
     },
 
     "hyprland/workspaces": {
@@ -122,15 +119,14 @@
         //}
     },
 
-    "wireplumber": {
-	"format": "{volume}%",
-	"on-click": "pwvucontrol"
-    },
+    /*"wireplumber": {
+	    "format": "{volume}%",
+    	"on-click": "pwvucontrol"
+    },*/
 
     "wireplumber#sink": {
-        "format": "{icon}  {volume}%",
-        "format-muted": "X",
-        "format-icons": [" ", " ", " "],
+        "format": "vol: {volume}%",
+        "format-muted": "vol: X",
         "on-click": "pwvucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 5
@@ -138,9 +134,9 @@
 
     "wireplumber#source": {
         "node-type": "Audio/Source",
-        "format": " {volume}%",
-        "format-muted": " ",
-	"on-click": "pwvucontrol",
+        "format": "mic: {volume}%",
+        "format-muted": "mic: X",
+    	"on-click": "pwvucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "scroll-step": 5
     },
@@ -152,7 +148,7 @@
 
     "backlight": {
         "format": "{icon} {percent}%",
-	"format-icons": [" "]
+	    "format-icons": [" "]
     },
 
     "backlight#icon": {
@@ -171,30 +167,35 @@
 
 
     "bluetooth": {
-	"on-click": "blueman-manager",
-	"format": " {status}",
-	"format-connected": " {device_alias}",
-	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-	"format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+	    "on-click": "blueman-manager",
+    	"format": "blth: {status}",
+    	"format-connected": "blth: {device_alias}",
+    	"format-connected-battery": "blth: {device_alias} {device_battery_percentage}%",
+    	"format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     },
 
 
     "custom/spotify": {
-        "format": "  {}",
-	"interval": 5,
-	"on-click": "flatpak run com.spotify.Client",
-	"exec": "~/.config/waybar/scripts/spotify.sh"
+        "return-type": "json",
+        "format": "{icon} {text}",
+        "format-icons":{
+            "play": "|>",
+            "pause": "||"
+        },
+    	"interval": 5,
+    	"on-click": "flatpak run com.spotify.Client",
+    	"exec": "~/.config/waybar/scripts/spotify.sh"
     },
 
     "custom/gdrive": {
        "exec": "~/.config/waybar/scripts/service-monitor.sh --user rclone-remote.service",
        "interval": 10,
        "on-click": "~/.config/waybar/scripts/gdrive.sh",
-       "format": "GDrv:{}"
+       "format": "gdrv:{}"
     }
 }
 
